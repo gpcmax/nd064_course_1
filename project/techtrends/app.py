@@ -1,12 +1,20 @@
 import sqlite3
+import logging
+import sys
 
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
+from datetime import datetime
+
+# Global var for amount of connections to database
+connectionAccessed = 0
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
 def get_db_connection():
     connection = sqlite3.connect('database.db')
+    global connectionAccessed
+    connectionAccessed+=1
     connection.row_factory = sqlite3.Row
     return connection
 
@@ -36,13 +44,22 @@ def index():
 def post(post_id):
     post = get_post(post_id)
     if post is None:
+      date = datetime.today().strftime("%m/%d/%Y")
+      current_time = datetime.now().strftime("%H:%M:%S")
+      app.logger.info('%s, %s, non-existing article was accessed and a 404 page was returned',date,current_time)
       return render_template('404.html'), 404
     else:
+      date = datetime.today().strftime("%m/%d/%Y")
+      current_time = datetime.now().strftime("%H:%M:%S")
+      app.logger.info('%s, %s, Article "%s" retrieved!',date,current_time,post['title'])
       return render_template('post.html', post=post)
 
 # Define the About Us page
 @app.route('/about')
 def about():
+    date = datetime.today().strftime("%m/%d/%Y")
+    current_time = datetime.now().strftime("%H:%M:%S")
+    app.logger.info('%s, %s, "About Us" page request Successful', date, current_time)
     return render_template('about.html')
 
 # Define the post creation functionality 
@@ -60,11 +77,52 @@ def create():
                          (title, content))
             connection.commit()
             connection.close()
-
+            date = datetime.today().strftime("%m/%d/%Y")
+            current_time = datetime.now().strftime("%H:%M:%S")
+            app.logger.info('%s, %s, New article "%s" was created', date, current_time,title)
             return redirect(url_for('index'))
-
     return render_template('create.html')
+
+# Defind the healthz page
+@app.route('/healthz')
+def healthz():
+    response = app.response_class(
+        response=json.dumps({"result":"OK - Healthy"}),
+        status=200,
+        mimetype='application/json'
+        )
+    date = datetime.today().strftime("%m/%d/%Y")
+    current_time = datetime.now().strftime("%H:%M:%S")
+    app.logger.info('%s, %s, Health request Successful', date, current_time)
+    return response
+
+# Define the Metrics page
+@app.route('/metrics')
+def metrics():
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute('select * from posts;')
+    row = cursor.fetchall()
+    response = app.response_class(
+        response=json.dumps({"db_connection_count":connectionAccessed,"post_count":len(row)}),
+        status=200,
+        mimetype='application/json'
+        )
+    connection.close()
+    date = datetime.today().strftime("%m/%d/%Y")
+    current_time = datetime.now().strftime("%H:%M:%S")
+    app.logger.info('%s, %s, Metrics request Successful', date, current_time)
+    return response
 
 # start the application on port 3111
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port='3111')
+    logger = logging.getLogger("__name__")
+    logging.basicConfig(filename='app.log',level=logging.DEBUG)
+    h1=logging.StreamHandler(sys.stdout)
+    h1.setLevel(logging.DEBUG)
+    h2=logging.StreamHandler(sys.stderr)
+    h2.setLevel(logging.ERROR)
+
+    logger.addHandler(h1)
+    logger.addHandler(h2)
+    app.run(host='0.0.0.0', port='3111')
