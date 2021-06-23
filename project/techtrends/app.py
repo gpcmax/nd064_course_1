@@ -117,7 +117,7 @@ def metrics():
 # start the application on port 3111
 if __name__ == "__main__":
     logger = logging.getLogger("__name__")
-    logging.basicConfig(filename='app.log',level=logging.DEBUG)
+    logging.basicConfig(level=logging.DEBUG)
     h1=logging.StreamHandler(sys.stdout)
     h1.setLevel(logging.DEBUG)
     h2=logging.StreamHandler(sys.stderr)
