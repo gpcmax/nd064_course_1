@@ -38,5 +38,5 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Docker Build
-        run: docker build -t techtrends .
+        run: docker build --file ./project/Dockerfile -t techtrends .
         
