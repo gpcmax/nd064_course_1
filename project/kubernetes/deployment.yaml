@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: techtrends
+  name: techtrends
+  namespace: sandbox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: techtrends
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: techtrends
+    spec:
+      containers:
+      - image: gpcmax/techtrends
+        name: techtrends
+        resources:
+                requests:
+                        CPU: "250m"
+                        memory: "64Mi"
+                limits:
+                        CPU: "500m"
+                        memory: "128Mi"
+        container port: 3111
+        livenessProbe:
+                httpGet:
+                        path: /healthz
+                        port: 3111
+        readinessProbe:
+                httpGet:
+                        path: /healthz
+                        port: 3111
+status: {}
