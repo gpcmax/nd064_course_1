@@ -5,9 +5,9 @@ metadata:
   labels:
     app: techtrends
   name: techtrends
-  namespace: {{ .Values.namespace.name}}
+  namespace: {{ .values.namespace.name}}
 spec:
-  replicas: {{.Values.replicaCount}}
+  replicas: {{.values.replicaCount}}
   selector:
     matchLabels:
       app: techtrends
@@ -19,10 +19,10 @@ spec:
         app: techtrends
     spec:
       containers:
-      - image: {{.Values.image.repository}}
+      - image: {{.values.image.repository}}
         name: techtrends
-        resources:{{.Values.resources}}
-        container port: {{.Values.containerPort}}
-        livenessProbe:{{.Values.livenessProbe}}
-        readinessProbe:{{.Values.readinessProbe}}
+        resources:{{.values.resources}}
+        container port: {{.values.containerPort}}
+        livenessProbe:{{.values.livenessProbe}}
+        readinessProbe:{{.values.readinessProbe}}
 status: {}

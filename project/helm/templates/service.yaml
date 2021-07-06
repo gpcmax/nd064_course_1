@@ -5,15 +5,15 @@ metadata:
   labels:
     app: sandbox
   name: techtrends
-  namespace:{{ .Values.namespace.name}}
+  namespace:{{ .values.namespace.name}}
 spec:
   ports:
   - name: 4111-3111
-    port: {{ .Values.namespace.service.port}}
-    protocol: {{ .Values.namespace.service.protocol}}
-    targetPort: {{ .Values.namespace.service.targetPort}}
+    port: {{ .values.namespace.service.port}}
+    protocol: {{ .values.namespace.service.protocol}}
+    targetPort: {{ .values.namespace.service.targetPort}}
   selector:
     app: sandbox
-  type: {{ .Values.namespace.service.type}}
+  type: {{ .values.namespace.service.type}}
 status:
   loadBalancer: {}
