@@ -23,10 +23,10 @@ spec:
         resources:
           requests:
             memory: {{.Values.resources.requests.memory}}
-            CPU: {{.Values.resources.requests.cpu}} 
+            cpu: {{.Values.resources.requests.cpu}} 
           limits:
             memory: {{.Values.resources.limits.memory}}
-            CPU: {{.Values.resources.limits.cpu}}
+            cpu: {{.Values.resources.limits.cpu}}
         name: techtrends
         ports:
         - containerPort: {{.Values.ports.containerPort}}
