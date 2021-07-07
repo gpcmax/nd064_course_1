@@ -22,7 +22,14 @@ spec:
       - image: {{.Values.image.repository}}
         name: techtrends
         resources: {{.Values.resources}}
-        containerPort: {{.Values.ports.containerPort}}
-        livenessProbe: {{.Values.livenessProbe}}
-        readinessProbe: {{.Values.readinessProbe}}
+        ports:
+        - containerPort: {{.Values.ports.containerPort}}
+        livenessProbe:
+          httpGet:
+            path: {{.Values.livenessProbe.path}}
+            port: {{.Values.livenessProbe.port}}
+        readinessProbe:
+          httpGet:
+            path: {{.Values.readinessProbe.path}}
+            port: {{.Values.readinessProbe.port}}
 status: {}
