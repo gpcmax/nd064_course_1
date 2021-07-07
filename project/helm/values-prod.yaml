@@ -5,9 +5,10 @@ namespace:
 replicaCount: 5
 resources: 
   limits: 
-    CPU: 500m
+    cpu: 500m
     memory: 256Mi
   requests: 
-    CPU: 350m
+    cpu: 350m
     memory: 128Mi
-service: "port:7111"
+service: 
+  port: 7111
