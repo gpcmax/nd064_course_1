@@ -1,6 +1,6 @@
 namespace:
   name: techtrends
- service:
+service:
   port: 4111
   targetPort: 3111
   protocol: TCP
