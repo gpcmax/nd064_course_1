@@ -1,4 +1,3 @@
-containerPort: 3111
 image: 
   pullPolicy: IfNotePresent
   repository: gpcmax/techtrends
@@ -9,6 +8,8 @@ livenessProbe:
     port: 3111
 namespace: 
   name: techtrends
+ports: 
+  containerPort: 3111
 readinessProbe: 
   httpGet: 
     path: /healthz
@@ -16,11 +17,11 @@ readinessProbe:
 replicaCount: 1
 resources: 
   limits: 
-    CPU: 500m
-    memory: 128Mi
+    CPU: "500m"
+    memory: "128Mi"
   requests: 
-    CPU: 250m
-    memory: 64Mi
+    CPU: "250m"
+    memory: "64Mi"
 service: 
   port: 4111
   protocol: TCP
