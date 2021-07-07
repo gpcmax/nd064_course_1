@@ -1,12 +1,17 @@
-namespace:
-  name: techtrends-staging
-service:
-    port:5111
-replicaCount: 3
-resources:
-    requests:
-        CPU: "300m"
-        memory: "90Mi"
-    limits:
-        CPU: "500m"
-        memory: "128Mi"
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+   name: techtrends-staging
+   namespace: argocd
+spec:
+   destination:
+     namespace: default
+     server: https://kubernetes.default.svc
+   project: default
+   source:
+     helm:
+       valueFiles:
+       - values-staging.yaml
+     path: project/helm
+     repoURL: https://github.com/gpcmax/nd064_course_1
+     targetRevision: HEAD
