@@ -3,17 +3,15 @@ image:
   repository: gpcmax/techtrends
   tag: latest
 livenessProbe: 
-  httpGet: 
-    path: /healthz
-    port: 3111
+  path: /healthz
+  port: 3111
 namespace: 
   name: techtrends
 ports: 
   containerPort: 3111
-readinessProbe: 
-  httpGet: 
-    path: /healthz
-    port: 3111
+readinessProbe:
+  path: /healthz
+  port: 3111
 replicaCount: 1
 resources: 
   limits: 
