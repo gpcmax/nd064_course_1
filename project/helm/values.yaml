@@ -1,28 +1,28 @@
-namespace:
-  name: techtrends
-service:
-  port: 4111
-  targetPort: 3111
-  protocol: TCP
-  type: ClusterIP 
-image:
-  repository: gpcmax/techtrends 
-  tag: latest
-  pullPolicy: IfNotePresent
-replicaCount: 1
-resources:
-    requests:
-        CPU: "250m"
-        memory: "64Mi"
-    limits:
-        CPU: "500m"
-        memory: "128Mi"
 containerPort: 3111
-livenessProbe:
-    httpGet:
-        path: /healthz
-        port: 3111
-readinessProbe:
-    httpGet:
-        path: /healthz
-        port: 3111
+image: 
+  pullPolicy: IfNotePresent
+  repository: gpcmax/techtrends
+  tag: latest
+livenessProbe: 
+  httpGet: 
+    path: /healthz
+    port: 3111
+namespace: 
+  name: techtrends
+readinessProbe: 
+  httpGet: 
+    path: /healthz
+    port: 3111
+replicaCount: 1
+resources: 
+  limits: 
+    CPU: 500m
+    memory: 128Mi
+  requests: 
+    CPU: 250m
+    memory: 64Mi
+service: 
+  port: 4111
+  protocol: TCP
+  targetPort: 3111
+  type: ClusterIP
