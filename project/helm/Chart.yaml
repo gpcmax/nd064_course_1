@@ -1,8 +1,9 @@
 apiVersion: v1
 name: techtrends
 description: Installs a techtrends project
-keywords: techtrends
+keywords: 
+- techtrends
 version: 1.0.0
 maintainers:
 - name: gcopelin
-  email: gage.copelin@gmail.com
+- email: gage.copelin@gmail.com
