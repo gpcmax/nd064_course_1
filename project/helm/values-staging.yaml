@@ -9,4 +9,4 @@ resources:
     cpu: "300m"
     memory: "90Mi"
 service:
-  port:5111
+  port: 5111
