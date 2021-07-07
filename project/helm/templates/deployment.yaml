@@ -21,13 +21,6 @@ spec:
       containers:
       - image: {{.Values.image.repository}}
         name: techtrends
-        resources:
-          limits:
-            memory: {{.Values.resources.limits.memory}}
-            CPU: {{.Values.resources.limits.cpu}}
-          requests:
-            memory: {{.Values.resources.requests.memory}}
-            CPU: {{.Values.resources.requests.cpu}} 
         ports:
         - containerPort: {{.Values.ports.containerPort}}
         livenessProbe:
@@ -38,4 +31,11 @@ spec:
           httpGet:
             path: {{.Values.readinessProbe.path}}
             port: {{.Values.readinessProbe.port}}
+        resources:
+          limits:
+            memory: {{.Values.resources.limits.memory}}
+            CPU: {{.Values.resources.limits.cpu}}
+          requests:
+            memory: {{.Values.resources.requests.memory}}
+            CPU: {{.Values.resources.requests.cpu}} 
 status: {}
