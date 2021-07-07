@@ -6,7 +6,7 @@ livenessProbe:
   path: /healthz
   port: 3111
 namespace: 
-  name: techtrends
+  name: sandbox
 ports: 
   containerPort: 3111
 readinessProbe:
