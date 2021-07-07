@@ -21,8 +21,8 @@ spec:
       containers:
       - image: {{.Values.image.repository}}
         name: techtrends
-        resources:{{.Values.resources}}
+        resources: {{.Values.resources}}
         container port: {{.Values.containerPort}}
-        livenessProbe:{{.Values.livenessProbe}}
-        readinessProbe:{{.Values.readinessProbe}}
+        livenessProbe: {{.Values.livenessProbe}}
+        readinessProbe: {{.Values.readinessProbe}}
 status: {}
