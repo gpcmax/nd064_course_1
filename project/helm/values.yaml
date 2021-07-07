@@ -16,10 +16,10 @@ replicaCount: 1
 resources: 
   limits:
     memory: "128Mi"
-    CPU: "500m"
+    cpu: "500m"
   requests:
     memory: "64Mi"
-    CPU: "250m"
+    cpu: "250m"
 service: 
   port: 4111
   protocol: TCP

@@ -24,10 +24,10 @@ spec:
         resources:
           limits:
             memory: {{.Values.resources.limits.memory}}
-            CPU: {{.Values.resources.limits.CPU}}
+            CPU: {{.Values.resources.limits.cpu}}
           requests:
             memory: {{.Values.resources.requests.memory}}
-            CPU: {{.Values.resources.requests.CPU}} 
+            CPU: {{.Values.resources.requests.cpu}} 
         ports:
         - containerPort: {{.Values.ports.containerPort}}
         livenessProbe:
