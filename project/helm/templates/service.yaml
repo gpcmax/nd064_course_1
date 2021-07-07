@@ -3,17 +3,17 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: sandbox
+    app: techtrends
   name: techtrends
-  namespace:{{ .values.namespace.name}}
+  namespace:{{ .Values.namespace.name}}
 spec:
   ports:
   - name: 4111-3111
-    port: {{ .values.namespace.service.port}}
-    protocol: {{ .values.namespace.service.protocol}}
-    targetPort: {{ .values.namespace.service.targetPort}}
+    port: {{ .Values.namespace.service.port}}
+    protocol: {{ .Values.namespace.service.protocol}}
+    targetPort: {{ .Values.namespace.service.targetPort}}
   selector:
-    app: sandbox
-  type: {{ .values.namespace.service.type}}
+    app: techtrends
+  type: {{ .Values.namespace.service.type}}
 status:
   loadBalancer: {}
