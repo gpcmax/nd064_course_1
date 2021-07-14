@@ -46,7 +46,7 @@ def post(post_id):
     if post is None:
       date = datetime.today().strftime("%m/%d/%Y")
       current_time = datetime.now().strftime("%H:%M:%S")
-      app.logger.info('%s, %s, non-existing article was accessed and a 404 page was returned',date,current_time)
+      app.logger.error('%s, %s, non-existing article was accessed and a 404 page was returned',date,current_time)
       return render_template('404.html'), 404
     else:
       date = datetime.today().strftime("%m/%d/%Y")
@@ -117,12 +117,5 @@ def metrics():
 # start the application on port 3111
 if __name__ == "__main__":
     logger = logging.getLogger("__name__")
-    logging.basicConfig(level=logging.DEBUG)
-    h1=logging.StreamHandler(sys.stdout)
-    h1.setLevel(logging.DEBUG)
-    h2=logging.StreamHandler(sys.stderr)
-    h2.setLevel(logging.ERROR)
-
-    logger.addHandler(h1)
-    logger.addHandler(h2)
+    logging.basicConfig(stream=sys.stdout,level=logging.DEBUG)
     app.run(host='0.0.0.0', port='3111')
